@@ -14,14 +14,19 @@ function gMAP(element)
 	}
 	
 	this.setOption = function(option, value) {
-		if(option == "center"){
-			this.map.set_center(new google.maps.LatLng(value.lat, value.lng));
-		} else if(option == "zoom"){
-			this.map.set_zoom(value);
-		} else if(option == "maptype"){
-			this.map.set_mapTypeId(value); //ROADMAP, SATELLITE, HYBRID, TERRAIN
-		} else if(option == "controls"){
-			this.map.navigationControlOptions(value); //DEFAULT, SMALL, ANDROID, ZOOM_PAN
+		switch(option) {
+			case "center":
+				this.map.set_center(new google.maps.LatLng(value.lat, value.lng));
+				break;
+			case "zoom":
+				this.map.set_zoom(value);
+				break;
+			case "maptype":
+				this.map.set_mapTypeId(value); //ROADMAP, SATELLITE, HYBRID, TERRAIN
+				break;
+			case "controls":
+				this.map.navigationControlOptions(value); //DEFAULT, SMALL, ANDROID, ZOOM_PAN
+				break;
 		}
 	}
 	
