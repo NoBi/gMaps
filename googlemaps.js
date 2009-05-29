@@ -124,9 +124,9 @@ function gMAP(element)
 	}
 	
 	this.setCenterBounds = function() {
-		bounds = new google.maps.LatLngBounds();
+		bounds = new google.maps.LatLngBounds(0, 0);
 		
-		for(x=0;x>this.markers.length;x++) {
+		for(x=0;x<this.markers.length;x++) {
 			bounds.extend(this.markers[x].get_position());
 		}
 		
