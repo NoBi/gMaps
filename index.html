@@ -14,7 +14,7 @@
 		gmap.setOption('center', {lat: -34.397, lng: 150.644});
 		gmap.setOption('zoom', 3);
 		gmap.setOption('maptype', google.maps.MapTypeId.ROADMAP);
-		gmap.addMarker(-34.397, 150.644, '', 'Test info.', {
+		gmap.addMarkerByPosition(-34.397, 150.644, '', 'Test info.', {
 			icon: {url: '/img/i_map.png'
 				, size: new google.maps.Size(20,28)
 				, origin: new google.maps.Point(0,0)
@@ -36,7 +36,7 @@
 				, anchor: new google.maps.Point(10,28)}
 		});
 		gmap.addMarkerByAddress('1600 Amphitheatre Parkway Mountain View, CA 94043', '', 'Test info.', '');
-		gmap.setCenterBounds();
+		//gmap.setCenterBounds();
 	}
 	</script>
 </head>

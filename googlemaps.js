@@ -30,7 +30,7 @@ function gMAP(element)
 		}
 	}
 	
-	this.addMarker = function(lat, lng, title, info, icon) {
+	this.addMarkerByPosition = function(lat, lng, title, info, icon) {
 		position = new google.maps.LatLng(lat, lng);
 		
 		var marker = new google.maps.Marker({
@@ -38,30 +38,7 @@ function gMAP(element)
 			map: this.map
 		});
 		
-		if(typeof(title) != "undefined")
-			marker.set_title(title);
-		
-		if(typeof(info) != "undefined") {
-			infowindow = new google.maps.InfoWindow({
-				content: info
-			});
-		
-			google.maps.event.addListener(marker, 'click', function() {
-				infowindow.open(this.map, marker)
-			});
-		}
-		
-		if(typeof(icon) != "undefined") {
-			if(typeof(icon.icon) != "undefined")
-				marker.set_icon(new google.maps.MarkerImage(icon.icon.url, icon.icon.size, icon.icon.origin, icon.icon.anchor));
-			if(typeof(icon.shadow) != "undefined")
-				marker.set_shadow(new google.maps.MarkerImage(icon.shadow.url, icon.shadow.size, icon.shadow.origin, icon.shadow.anchor));
-		}
-		
-		this.markers[i] = marker;
-		i++;
-		
-		return marker;
+		return this.addMarker(marker, title, info, icon);
 	}
 	
 	this.addMarkerByAddress = function(address, title, info, icon) {
@@ -79,6 +56,10 @@ function gMAP(element)
 			}
 		});
 		
+		return this.addMarker(marker, title, info, icon);
+	}
+	
+	this.addMarker = function(marker, title, info, icon) {
 		if(typeof(title) != "undefined")
 			marker.set_title(title);
 		
@@ -101,7 +82,7 @@ function gMAP(element)
 		
 		this.markers[i] = marker;
 		i++;
-			
+		
 		return marker;
 	}
 	
