@@ -30,30 +30,6 @@ function gMAP(element)
 		}
 	}
 	
-	this.setXMLFile = function(file) {
-		//Parse XML file
-		
-		this.createMap();
-		
-		this.map.set_center();
-		this.map.set_zoom();
-		this.map.set_mapTypeId();
-		
-		//Add Items
-	}
-	
-	this.setXML = function(xml) {
-		//Parse XML
-		
-		this.createMap();
-		
-		this.map.set_center();
-		this.map.set_zoom();
-		this.map.set_mapTypeId();
-		
-		//Add Items
-	}
-	
 	this.addMarker = function(lat, lng, title, info, icon) {
 		position = new google.maps.LatLng(lat, lng);
 		
@@ -65,8 +41,7 @@ function gMAP(element)
 		if(typeof(title) != "undefined")
 			marker.set_title(title);
 		
-		if(typeof(info) != "undefined")
-		{
+		if(typeof(info) != "undefined") {
 			infowindow = new google.maps.InfoWindow({
 				content: info
 			});
@@ -76,8 +51,12 @@ function gMAP(element)
 			});
 		}
 		
-		if(typeof(icon) != "undefined")
-			marker.set_icon(icon);
+		if(typeof(icon) != "undefined") {
+			if(typeof(icon.icon) != "undefined")
+				marker.set_icon(new google.maps.MarkerImage(icon.icon.url, icon.icon.size, icon.icon.origin, icon.icon.anchor));
+			if(typeof(icon.shadow) != "undefined")
+				marker.set_shadow(new google.maps.MarkerImage(icon.shadow.url, icon.shadow.size, icon.shadow.origin, icon.shadow.anchor));
+		}
 		
 		this.markers[i] = marker;
 		i++;
@@ -103,8 +82,7 @@ function gMAP(element)
 		if(typeof(title) != "undefined")
 			marker.set_title(title);
 		
-		if(typeof(info) != "undefined")
-		{
+		if(typeof(info) != "undefined") {
 			infowindow = new google.maps.InfoWindow({
 				content: info
 			});
@@ -114,8 +92,12 @@ function gMAP(element)
 			});
 		}
 		
-		if(typeof(icon) != "undefined")
-			marker.set_icon(icon);
+		if(typeof(icon) != "undefined") {
+			if(typeof(icon.icon) != "undefined")
+				marker.set_icon(new google.maps.MarkerImage(icon.icon.url, icon.icon.size, icon.icon.origin, icon.icon.anchor));
+			if(typeof(icon.shadow) != "undefined")
+				marker.set_shadow(new google.maps.MarkerImage(icon.shadow.url, icon.shadow.size, icon.shadow.origin, icon.shadow.anchor));
+		}
 		
 		this.markers[i] = marker;
 		i++;
