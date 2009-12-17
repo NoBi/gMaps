@@ -16,13 +16,13 @@ function gMAP(element)
 	this.setOption = function(option, value) {
 		switch(option) {
 			case "center":
-				this.map.set_center(new google.maps.LatLng(value.lat, value.lng));
+				this.map.setCenter(new google.maps.LatLng(value.lat, value.lng));
 				break;
 			case "zoom":
-				this.map.set_zoom(value);
+				this.map.setZoom(value);
 				break;
 			case "maptype":
-				this.map.set_mapTypeId(value); //ROADMAP, SATELLITE, HYBRID, TERRAIN
+				this.map.setMapTypeId(value); //ROADMAP, SATELLITE, HYBRID, TERRAIN
 				break;
 			case "controls":
 				this.map.navigationControlOptions(value); //DEFAULT, SMALL, ANDROID, ZOOM_PAN
@@ -49,7 +49,7 @@ function gMAP(element)
 		this.geocoder.geocode( { address: address}, function(results, status) {
 			if (status == google.maps.GeocoderStatus.OK && results.length) {
 				if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
-					marker.set_position(results[0].geometry.location);
+					marker.setPosition(results[0].geometry.location);
 		        }
 			} else {
 				alert("Geocode was unsuccessful due to: " + status);
@@ -61,7 +61,7 @@ function gMAP(element)
 	
 	this.addMarker = function(marker, title, info, icon) {
 		if(typeof(title) != "undefined")
-			marker.set_title(title);
+			marker.setTitle(title);
 		
 		if(typeof(info) != "undefined") {
 			infowindow = new google.maps.InfoWindow({
@@ -75,9 +75,9 @@ function gMAP(element)
 		
 		if(typeof(icon) != "undefined") {
 			if(typeof(icon.icon) != "undefined")
-				marker.set_icon(new google.maps.MarkerImage(icon.icon.url, icon.icon.size, icon.icon.origin, icon.icon.anchor));
+				marker.setIcon(new google.maps.MarkerImage(icon.icon.url, icon.icon.size, icon.icon.origin, icon.icon.anchor));
 			if(typeof(icon.shadow) != "undefined")
-				marker.set_shadow(new google.maps.MarkerImage(icon.shadow.url, icon.shadow.size, icon.shadow.origin, icon.shadow.anchor));
+				marker.setShadow(new google.maps.MarkerImage(icon.shadow.url, icon.shadow.size, icon.shadow.origin, icon.shadow.anchor));
 		}
 		
 		this.markers[i] = marker;
@@ -90,9 +90,9 @@ function gMAP(element)
 		bounds = new google.maps.LatLngBounds(0, 0);
 		
 		for(x=0;x<this.markers.length;x++) {
-			bounds.extend(this.markers[x].get_position());
+			bounds.extend(this.markers[x].getPosition());
 		}
 		
-		this.map.set_center(bounds.getCenter());
+		this.map.setCenter(bounds.getCenter());
 	}
 }
