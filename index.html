@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+<!//DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -11,34 +11,80 @@
 	{
 		var gmap = new gMAP('map_canvas');
 		gmap.createMap();
-		gmap.setOption('center', {lat: 33.588074, lng: -98.63026});
-		gmap.setOption('zoom', 8);
-		gmap.setOption('maptype', google.maps.MapTypeId.ROADMAP);
-		/*gmap.addMarkerByPosition(-34.397, 150.644, '', 'Test info.', {
-			icon: {url: '/img/i_map.png'
-				, size: new google.maps.Size(20,28)
-				, origin: new google.maps.Point(0,0)
-				, anchor: new google.maps.Point(10,28)},
-			shadow: {url: '/img/shadow.png'
-				, size: new google.maps.Size(35,28)
-				, origin: new google.maps.Point(0,0)
-				, anchor: new google.maps.Point(10,28)}
-		});*/
-		gmap.addMarkerByAddress('423 W CHERRY STREET - Archer City, TX 76351', '', 'Test info.', '');
-		gmap.addMarkerByAddress('4245 Kemp Blvd. Wichita Falls, TX 76308', '', 'Test info.', {
-			icon: {url: '/img/i_map.png'
-				, size: new google.maps.Size(20,28)
-				, origin: new google.maps.Point(0,0)
-				, anchor: new google.maps.Point(10,28)
-			},
-			shadow: {url: '/img/shadow.png'
-				, size: new google.maps.Size(35,28)
-				, origin: new google.maps.Point(0,0)
-				, anchor: new google.maps.Point(10,28)
-			}
+		gmap.setOption("center", {lat: 33.588074, lng: -98.63026});
+		gmap.setOption("zoom", 8);
+		gmap.setOption("maptype", google.maps.MapTypeId.ROADMAP);
+		
+		marker = new mapMarker(gmap);
+		marker.setByPosition(33.588074, -98.63026);
+		marker.setInfoWindow("This is a test message.");
+		marker.setIcon({
+			url: "/img/i_map.png"
+			,size: new google.maps.Size(20,28)
+			,origin: new google.maps.Point(0,0)
+			,anchor: new google.maps.Point(10,28)
 		});
-		//gmap.addMarkerByAddress('1600 Amphitheatre Parkway Mountain View, CA 94043', '', 'Test info.', '');
-		//gmap.setCenterBounds();
+		marker.setShadow({
+			url: "/img/shadow.png"
+			,size: new google.maps.Size(35,28)
+			,origin: new google.maps.Point(0,0)
+			,anchor: new google.maps.Point(10,28)
+		});
+		
+		marker = new mapMarker(gmap);
+		marker.setByPosition(33.899074, -98.73026);
+		marker.setInfoWindow("This is another test message.");
+		marker.draggable(
+			function(){
+				console.log('Start');
+			},
+			function(latLng){
+				console.log(this.getPosition());
+				console.log('End');
+			}
+		);
+		
+		marker = new mapMarker(gmap);
+		marker.setByAddress("915 9th Street, Wichita Falls, TX 76309");
+		
+		polyline = new mapPolyline(gmap);
+		polyline.addPoint(33.1798501, -98.0836901);
+		polyline.addPoint(33.5056665, -97.1553454);
+		polyline.addPoint(34.5843711, -97.1278796);
+		polyline.addPoint(34.9048455, -98.0617175);
+		polyline.draw();
+		
+		polyline = new mapPolyline(gmap);
+		polyline.addPoint(33.4369337, -94.6284899);
+		polyline.addPoint(34.0763139, -96.3643298);
+		polyline.addPoint(34.4802891, -94.9470934);
+		polyline.addPoint(35.0128934, -96.9411120);
+		polyline.setColor("#7E7DDF");
+		polyline.setOpacity(0.6);
+		polyline.setWeight(6);
+		polyline.draw();
+		
+		polygon = new mapPolygon(gmap);
+		polygon.addPoint(34.8417518, -102.5770983);
+		polygon.addPoint(34.3579400, -102.5606188);
+		polygon.addPoint(33.5194066, -102.7364001);
+		polygon.addPoint(34.2263289, -101.6048083);
+		polygon.draw();
+		
+		polygon = new mapPolygon(gmap);
+		polygon.addPoint(33.3773212, -101.0774645);
+		polygon.addPoint(34.7018722, -101.1488757);
+		polygon.addPoint(34.8588873, -98.9516100);
+		polygon.addPoint(34.1399891, -99.1768298);
+		polygon.addPoint(33.2395978, -98.6879382);
+		polygon.setStrokeColor("#002F06");
+		polygon.setStrokeOpacity(0.8);
+		polygon.setStrokeWeight(3);
+		polygon.setFillColor("#7E7DDF");
+		polygon.setFillOpacity(0.5);
+		polygon.draw();
+		
+		gmap.setCenterBounds();
 	}
 	</script>
 </head>
